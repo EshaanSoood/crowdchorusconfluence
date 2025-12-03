@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Underground - Music Event</title>
+    <style>
+        @font-face {
+            font-family: 'ParisRebel';
+            src: url('/assets/PARISREBEL.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #FFFDEE;
+            color: #000000;
+            font-family: Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            padding: 60px 20px;
+        }
+
+        .poster {
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .poster img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .cta-button {
+            background-color: #4835FD;
+            color: #FE4A4B;
+            border: none;
+            padding: 16px 48px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background-color: #3d2ae8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(72, 53, 253, 0.3);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        /* Section Spacing */
+        section {
+            padding: 80px 0;
+        }
+
+        /* About Section */
+        .about h1 {
+            font-family: 'ParisRebel', cursive;
+            font-size: 48px;
+            color: #4835FD;
+            margin-bottom: 40px;
+            line-height: 1.2;
+        }
+
+        .about p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        .about p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Bands Section */
+        .accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        details {
+            border: 2px solid #4835FD;
+            border-radius: 6px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        details:hover {
+            box-shadow: 0 8px 24px rgba(72, 53, 253, 0.1);
+        }
+
+        summary {
+            background-color: #4835FD;
+            color: #FE4A4B;
+            padding: 20px;
+            cursor: pointer;
+            user-select: none;
+            font-weight: bold;
+            font-size: 24px;
+            font-family: 'ParisRebel', cursive;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            list-style: none;
+        }
+
+        summary:hover {
+            background-color: #3d2ae8;
+        }
+
+        summary::after {
+            content: '▼';
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .band-content {
+            padding: 30px;
+            background-color: #FFFDEE;
+            border-top: 2px solid #4835FD;
+        }
+
+        .band-bio {
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: #000000;
+        }
+
+        .band-bio:last-child {
+            margin-bottom: 0;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 6px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Tickets Section */
+        .tickets {
+            background-color: #FFFDEE;
+        }
+
+        .tickets h1 {
+            font-family: 'ParisRebel', cursive;
+            font-size: 48px;
+            color: #4835FD;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        /* Form Styles */
+        .ticket-form {
+            background-color: #ffffff;
+            border: 2px solid #4835FD;
+            border-radius: 6px;
+            padding: 40px;
+            margin-bottom: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4835FD;
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #4835FD;
+            border-radius: 4px;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #FFB236;
+            box-shadow: 0 0 0 3px rgba(255, 178, 54, 0.1);
+        }
+
+        input:required:invalid {
+            border-color: #FE4A4B;
+        }
+
+        .form-submit {
+            background-color: #4835FD;
+            color: #FE4A4B;
+            border: none;
+            padding: 16px 48px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .form-submit:hover:not(:disabled) {
+            background-color: #3d2ae8;
+            transform: translateY(-2px);
+        }
+
+        .form-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Payment Confirmation */
+        .payment-confirmation {
+            display: none;
+            background-color: #ffffff;
+            border: 2px solid #4835FD;
+            border-radius: 6px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .payment-confirmation.show {
+            display: block;
+        }
+
+        .payment-confirmation p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #000000;
+            margin-bottom: 30px;
+        }
+
+        .total-amount {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4835FD;
+            margin-bottom: 30px;
+        }
+
+        .venmo-qr {
+            max-width: 300px;
+            margin: 0 auto 30px;
+        }
+
+        .venmo-qr img {
+            width: 100%;
+            height: auto;
+            border: 2px solid #4835FD;
+            border-radius: 6px;
+        }
+
+        .back-button {
+            background-color: #4835FD;
+            color: #FE4A4B;
+            border: none;
+            padding: 12px 32px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #3d2ae8;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #4835FD;
+            color: #FE4A4B;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        footer p {
+            font-size: 14px;
+            margin: 8px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tickets h1 {
+                font-size: 32px;
+            }
+
+            .hero {
+                padding: 40px 20px;
+                gap: 30px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .ticket-form {
+                padding: 24px;
+            }
+
+            .payment-confirmation {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="poster">
+            <img src="/assets/poster.png" alt="Urban Underground event poster - music event featuring five bands on January 11th at Hart Bar in Brooklyn">
+        </div>
+        <button class="cta-button" onclick="document.getElementById('tickets').scrollIntoView()">Get Tickets</button>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <h1>About Urban Underground</h1>
+            <p>Hey there! Urban underground is an event we set up to have a space where every genre of music is welcome. We've always found it hard to classify music into tight boxes and this evening is in a lot of ways against everything we've been told in marketing lessons. There is no one theme through the bands, no single genre, just great bands that love doing what they do.</p>
+            <p>We have five great acts lined up for the evening. But don't take our word for it, you can check out their music below.</p>
+        </div>
+    </section>
+
+    <!-- Bands Section -->
+    <section class="bands">
+        <div class="container">
+            <div class="accordion">
+                <!-- Mercer Patterson Quintet -->
+                <details>
+                    <summary><h2 style="margin: 0; display: inline;">Mercer Patterson Quintet</h2></summary>
+                    <div class="band-content">
+                        <div class="band-bio">
+                            <p>Awaiting bio</p>
+                        </div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/mlNGNEK0oXg" title="Mercer Patterson Quintet performance" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- The Sonic Alchemists -->
+                <details>
+                    <summary><h2 style="margin: 0; display: inline;">The Sonic Alchemists</h2></summary>
+                    <div class="band-content">
+                        <div class="band-bio">
+                            <p>The Sonic Alchemists are an improvised music group led by guitarist and composer Eshaan Sood. The groups sound strikes an immaculate balance between energetic grooves, spirited improvisation and soulful introspection. A storytelling experience at its core, the band's music pulls at the heart strings of listeners, jazz fans or otherwise.</p>
+                            <p>This show marks the beginning of the New York chapter of the Sonic Alchemists featuring long time collaborator Sam Schaeffer on Drums and two exceptional additions to the Sonic Alchemists family with Aidan McCarthy on Bass and Naomi Nakamishi on piano.</p>
+                        </div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/AlvMCxaiIno" title="The Sonic Alchemists performance" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Tyjhier -->
+                <details>
+                    <summary><h2 style="margin: 0; display: inline;">Tyjhier</h2></summary>
+                    <div class="band-content">
+                        <div class="band-bio">
+                            <p>Tyjhier is a 25 year old upcoming singer/songwriter born and raised in Syracuse, NY, but based in Brooklyn. Her unique blend of RNB and Neo Soul gives her music a quality that resembles a breath of fresh air, which is showcased beautifully in her projects "The In-Betweens" and "Bloom Where You're Planted." She takes inspiration from artists such as Cleo Sol, Stevie Wonder, and Sza.</p>
+                            <p>Tyjhier has been featured on Syracuse.com and NYSmusic.com for being a new artist to look out for and is the winner of the 2024 SAMMY winner for Best New Artist and Best R&B Recording.</p>
+                        </div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/weWKM6s1P7E" title="Tyjhier performance" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Bim + Bo -->
+                <details>
+                    <summary><h2 style="margin: 0; display: inline;">Bim + Bo</h2></summary>
+                    <div class="band-content">
+                        <div class="band-bio">
+                            <p>bim+bo (pronounced "bim plus bo") is an alternative soul band formed in Chicago, based in Brooklyn. The experimental duo began with producer and multi instrumentalist Blank Face Villain, and vocalist and dancer, Brittany Harlin. They performed alongside each other in Chicago's DIY scene, and have been collaborating since.</p>
+                            <p>Blurring the line between heartfelt confessions and dance breaks, the ensemble invites both internal reflection and external release. Equal parts disco, punk rock, dance movement, and mixed martial arts, the group disarms with vulnerability and rebuilds with courage. The ensemble performs as a duo as well as a band, continuing to touch stages, delivering a breath of fresh air and inclusion in the conversation.</p>
+                        </div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/e7uof4UnQ5c" title="Bim + Bo performance" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Figurines -->
+                <details>
+                    <summary><h2 style="margin: 0; display: inline;">Figurines</h2></summary>
+                    <div class="band-content">
+                        <div class="band-bio">
+                            <p>A brand new electric trio project led by guitarist Eshaan Sood, Figurines is a band that combines the energy of Rock music with the improvisational excitement of Jazz. After finding a voice for his folk influences in The Sonic Alchemists, Figurines was formed to give voice to all the Rock music Sood grew up with during his teenage years.</p>
+                            <p>This is the band's debut performance. Will they Rock? Will they pack up and never play again? Only one way to find out.</p>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tickets Section -->
+    <section class="tickets" id="tickets">
+        <div class="container">
+            <h1>Get Your Tickets</h1>
+
+            <form class="ticket-form" id="attendeeForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="first-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="last-name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="ticket-quantity">Number of Tickets</label>
+                    <select id="ticket-quantity" name="ticket-quantity" required>
+                        <option value="">Select quantity</option>
+                        <option value="1">1 Ticket - $14</option>
+                        <option value="2">2 Tickets - $25</option>
+                        <option value="3">3 Tickets - $39</option>
+                        <option value="4">4 Tickets - $50</option>
+                        <option value="5">5 Tickets - $64</option>
+                        <option value="6">6 Tickets - $75</option>
+                        <option value="7">7 Tickets - $89</option>
+                        <option value="8">8 Tickets - $100</option>
+                    </select>
+                </div>
+                <button type="submit" class="form-submit" id="submitBtn">Get Tickets</button>
+            </form>
+
+            <div class="payment-confirmation" id="paymentConfirmation">
+                <p><strong>Your total is <span class="total-amount" id="totalAmount">$0</span></strong></p>
+                <div class="venmo-qr">
+                    <img src="/assets/venmoqr.png" alt="Venmo QR code for payment">
+                </div>
+                <p><strong>Please scan this QR code and make sure to mention your name and Urban Underground in the payment description. Sorry this is a little DIY but we're just getting started so please bare with us :)</strong></p>
+                <button class="back-button" onclick="resetForm()">Back to Form</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Urban Underground</strong></p>
+        <p>11th January | Doors open at 6:00 PM</p>
+        <p>Hart Bar, 538 Hart St, Brooklyn, NY</p>
+        <p>Ages 21+ only</p>
+    </footer>
+
+    <script>
+        function calculateTotal(quantity) {
+            const basePrice = 14;
+            const twoPackPrice = 25;
+            
+            if (quantity === 1) return basePrice;
+            
+            const fullPacks = Math.floor(quantity / 2);
+            const remainder = quantity % 2;
+            
+            let total = fullPacks * twoPackPrice;
+            if (remainder === 1) {
+                total += basePrice;
+            }
+            
+            return total;
+        }
+
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('attendeeForm');
+            if (form.checkValidity() === false) {
+                form.reportValidity();
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const quantity = document.getElementById('ticket-quantity').value;
+            const total = calculateTotal(parseInt(quantity));
+
+            const formData = new FormData();
+            formData.append('first-name', firstName);
+            formData.append('last-name', lastName);
+            formData.append('email', email);
+            formData.append('phone', phone);
+            formData.append('ticket-quantity', quantity);
+            formData.append('total', '
+</body>
+</html> + total);
+
+            try {
+                const response = await fetch('https://formspree.io/f/xkgdbkdr', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    document.getElementById('totalAmount').textContent = '
+</body>
+</html> + total;
+                    document.getElementById('paymentConfirmation').classList.add('show');
+                    form.style.display = 'none';
+                } else {
+                    alert('There was an issue submitting your form. Please try again.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Get Tickets';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error submitting your form. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Get Tickets';
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('attendeeForm').reset();
+            document.getElementById('attendeeForm').style.display = 'block';
+            document.getElementById('paymentConfirmation').classList.remove('show');
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('submitBtn').textContent = 'Get Tickets';
+            document.getElementById('tickets').scrollIntoView();
+        }
+    </script>
+</body>
+</html>
