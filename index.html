@@ -414,7 +414,7 @@
                     <summary><h2 style="margin: 0; display: inline;">Mercer Patterson Quintet</h2></summary>
                     <div class="band-content">
                         <div class="band-bio">
-                            <p>AThe Mercer Patterson Quintet is a contemporary jazz ensemble originating in the Metro-Detroit area. They play a variety of originals, written by all members of the band and are influenced by a wide range of styles and artists, including the music of Herbie Hancock, Frank Zappa, and Steve Lehman.
+                            <p>The Mercer Patterson Quintet is a contemporary jazz ensemble originating in the Metro-Detroit area. They play a variety of originals, written by all members of the band and are influenced by a wide range of styles and artists, including the music of Herbie Hancock, Frank Zappa, and Steve Lehman.
 Under the mentorship of jazz luminaries such as Terrell Stafford, Robert Hurst, Brian Lynch, Andy Milne, Ellen Rowe, Caroline Davis, and Chuck Bergeron, the quintet has honed a sophisticated musical voice that is both technically masterful and emotionally compelling. Their collaborative approach and compositional depth have earned them performances at major venues and festivals across the U.S., including the Detroit Jazz Festival, the Shapeshifter Lab in Brooklyn, Mr. Tipples in San Francisco, Ravenscroft in Arizona, and Aspen-Snowmass Jazz in Colorado.</p>
                         </div>
                         <div class="video-container">
@@ -583,9 +583,7 @@ Under the mentorship of jazz luminaries such as Terrell Stafford, Robert Hurst, 
             formData.append('email', email);
             formData.append('phone', phone);
             formData.append('ticket-quantity', quantity);
-            formData.append('total', '
-</body>
-</html> + total);
+            formData.append('total', '$' + total);
 
             try {
                 const response = await fetch('https://formspree.io/f/xkgdbkdr', {
@@ -597,9 +595,7 @@ Under the mentorship of jazz luminaries such as Terrell Stafford, Robert Hurst, 
                 });
 
                 if (response.ok) {
-                    document.getElementById('totalAmount').textContent = '
-</body>
-</html> + total;
+                    document.getElementById('totalAmount').textContent = '$' + total;
                     document.getElementById('paymentConfirmation').classList.add('show');
                     form.style.display = 'none';
                 } else {
