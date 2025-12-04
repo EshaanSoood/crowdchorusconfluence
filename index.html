@@ -313,7 +313,7 @@
         }
 
         .venmo-qr {
-            max-width: 300px;
+            max-width: 380px;
             margin: 0 auto 30px;
         }
 
@@ -522,8 +522,8 @@ Under the mentorship of jazz luminaries such as Terrell Stafford, Robert Hurst, 
 
             <div class="payment-confirmation" id="paymentConfirmation">
                 <p><strong>Your total is <span class="total-amount" id="totalAmount">$0</span></strong></p>
-                <div class="venmo-qr">
-                    <img src="/assets/venmoqr.png" alt="Venmo QR code for payment">
+                <div class="venmo-qr" id="venmoQr">
+                    <img src="/assets/venmoqr.png" alt="Venmo QR code for payment" tabindex="-1">
                 </div>
                 <p><strong>Please scan this QR code and make sure to mention your name and Urban Underground in the payment description. Sorry this is a little DIY but we're just getting started so please bare with us :)</strong></p>
                 <button class="back-button" onclick="resetForm()">Back to Form</button>
@@ -598,6 +598,13 @@ Under the mentorship of jazz luminaries such as Terrell Stafford, Robert Hurst, 
                     document.getElementById('totalAmount').textContent = '$' + total;
                     document.getElementById('paymentConfirmation').classList.add('show');
                     form.style.display = 'none';
+                    
+                    // Scroll to and focus on the Venmo QR code
+                    setTimeout(() => {
+                        const venmoQr = document.getElementById('venmoQr');
+                        venmoQr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        venmoQr.querySelector('img').focus();
+                    }, 100);
                 } else {
                     alert('There was an issue submitting your form. Please try again.');
                     submitBtn.disabled = false;
