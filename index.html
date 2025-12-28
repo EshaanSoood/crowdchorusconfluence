@@ -393,7 +393,7 @@
         <div class="poster">
             <img src="assets/uus.jpg" alt="Urban Underground event poster - music event featuring five bands on January 11th at Hart Bar in Brooklyn">
         </div>
-        <button class="cta-button" onclick="document.getElementById('tickets').scrollIntoView()">Get Tickets</button>
+        <button class="cta-button" onclick="document.getElementById('tickets').scrollIntoView({ behavior: 'smooth', block: 'start' }); setTimeout(() => document.getElementById('first-name').focus(), 300);">Get Tickets</button>
     </section>
 
     <!-- About Section -->
