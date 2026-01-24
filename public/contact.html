@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Crowd Chorus Confluence</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-logo">
+      <a href="./index.html">
+        <img src="./images/CCC-Brush-Logo-trimmed.png" alt="Crowd Chorus Confluence Logo">
+      </a>
+    </div>
+    <nav class="header-nav">
+      <a href="./index.html">Home</a>
+      <a href="./artists.html">Artists</a>
+      <a href="./contact.html">Contact</a>
+    </nav>
+    <a href="./contact.html#contact-form" class="header-cta">Inquire Now</a>
+  </header>
+
+  <main class="site-container">
+    <h1>Get In Touch</h1>
+    
+    <section class="contact-intro">
+      <p>Get in touch with us! We'd love to hear from you and discuss how we can help with your musical journey.</p>
+      <p>Fill out the form below or <a href="mailto:contact@crowdchorusconfluence.com">email us directly</a>.</p>
+    </section>
+
+    <form
+      id="contact-form"
+      class="contact-form"
+      action="https://formspree.io/f/movglree"
+      method="POST"
+      novalidate
+    >
+      <div class="contact-field-group contact-field-group--two-column">
+        <div class="contact-field">
+          <label for="name" class="contact-label">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="contact-input input"
+            required
+            placeholder="Your name"
+          />
+        </div>
+
+        <div class="contact-field">
+          <label for="email" class="contact-label">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="contact-input input"
+            required
+            placeholder="your.email@example.com"
+          />
+        </div>
+      </div>
+
+      <div class="contact-field-group">
+        <div class="contact-field">
+          <label for="subject" class="contact-label">Subject</label>
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            class="contact-input input"
+            placeholder="What's this about?"
+          />
+        </div>
+      </div>
+
+      <div class="contact-field-group">
+        <div class="contact-field">
+          <label for="message" class="contact-label">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            class="contact-input input"
+            rows="6"
+            required
+            placeholder="Tell us about your music and goals..."
+          ></textarea>
+          <p class="contact-help">Please include your music links and any specific questions you have.</p>
+        </div>
+      </div>
+
+      <div class="contact-submit-row">
+        <button type="submit" class="btn-artistic">Send Message</button>
+      </div>
+    </form>
+
+    <div id="contact-thankyou" class="contact-thankyou" hidden>
+      <p class="heading-brand">Thanks for getting in touch.</p>
+      <p><strong>We'll be in touch super soon.</strong></p>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="./images/CCC-Brush-Logo-trimmed.png" alt="Crowd Chorus Confluence Logo">
+      </div>
+      <p class="footer-text">© 2024 Crowd Chorus Confluence</p>
+    </div>
+    <div class="footer-links">
+      <a href="#privacy">Privacy</a>
+      <a href="#terms">Terms</a>
+      <a href="./contact.html">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // Auto-focus form when linked with hash anchor
+    window.addEventListener('DOMContentLoaded', function() {
+      if (window.location.hash === '#contact-form') {
+        const form = document.getElementById('contact-form');
+        const firstInput = document.getElementById('name');
+        
+        // Scroll to form smoothly
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Focus first input after a short delay to ensure scroll completes
+        setTimeout(function() {
+          firstInput.focus();
+        }, 300);
+      }
+    });
+
+    // Handle form submission and show thank you message
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const form = this;
+      const formData = new FormData(form);
+      
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          form.hidden = true;
+          document.getElementById('contact-thankyou').hidden = false;
+          form.reset();
+        } else {
+          return response.json().then(data => {
+            if (data.errors) {
+              console.error('Form errors:', data.errors);
+            }
+            alert('There was a problem submitting your form. Please try again.');
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('There was a problem submitting your form. Please try again.');
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+

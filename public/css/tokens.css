@@ -1,0 +1,224 @@
+/**
+ * Design Tokens - Single Source of Truth
+ *
+ * This file defines every design value used across the project.
+ * All component CSS and utility styles must reference these tokens.
+ *
+ * Import order in your project:
+ * 1. tokens.css (this file - defines variables)
+ * 2. reset.css (imports this file, applies normalization)
+ * 3. globals.css (imports this file and reset.css, applies base styles)
+ * 4. components.css (builds components using these tokens)
+ * 5. utilities.css (edge cases only)
+ */
+
+@font-face {
+  font-family: 'PARISREBEL';
+  src: url('../fonts/PARISREBEL.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ==========================================================================
+     SPACING SCALE
+     ========================================================================== */
+  /* All padding, margins, gaps use these semantic names. Never add a spacing value outside this scale. */
+  
+  --space-0: 0;
+  --space-tiny: 0.25rem; /* 4px */
+  --space-small: 0.5rem; /* 8px */
+  --space-small-plus: 0.75rem; /* 12px */
+  --space-medium: 1rem; /* 16px */
+  --space-medium-plus: 1.25rem; /* 20px */
+  --space-large: 1.5rem; /* 24px */
+  --space-large-plus: 1.75rem; /* 28px */
+  --space-xlarge: 2rem; /* 32px */
+  --space-xlarge-plus: 2.5rem; /* 40px */
+  --space-huge: 3rem; /* 48px */
+  --space-huge-plus: 3.5rem; /* 56px */
+  --space-huge-xl: 4rem; /* 64px */
+  --space-huge-2xl: 5rem; /* 80px */
+
+  /* ==========================================================================
+     FONT SIZES
+     ========================================================================== */
+  /* Predefined type scale. Never use arbitrary font sizes. */
+  
+  --text-xs: 0.75rem; /* 12px - labels, small text */
+  --text-sm: 0.875rem; /* 14px - small body text */
+  --text-base: 1rem; /* 16px - default body text */
+  --text-lg: 1.125rem; /* 18px - large body text */
+  --text-xl: 1.25rem; /* 20px - small headings */
+  --text-2xl: 1.5rem; /* 24px - medium headings */
+  --text-3xl: 1.875rem; /* 30px - large headings */
+  --text-4xl: 2.25rem; /* 36px - extra large headings */
+  --text-5xl: 3rem; /* 48px - hero/display */
+  --text-6xl: 3.75rem; /* 60px - large hero/display */
+
+  /* ==========================================================================
+     LINE HEIGHTS
+     ========================================================================== */
+  /* For readability. Apply based on context. */
+  
+  --leading-tight: 1.25; /* Headings, compact text */
+  --leading-snug: 1.375; /* Subheadings */
+  --leading-normal: 1.5; /* Default line height */
+  --leading-relaxed: 1.625; /* Body copy, comfortable reading */
+  --leading-loose: 2; /* Extra breathing room */
+
+  /* ==========================================================================
+     LETTER SPACING
+     ========================================================================== */
+  /* For typographic control. Use sparingly. */
+  
+  --tracking-tighter: -0.05em; /* Condensed, headlines only */
+  --tracking-tight: -0.025em; /* Slightly tight */
+  --tracking-normal: 0; /* Default spacing */
+  --tracking-wide: 0.025em; /* Slightly loose */
+  --tracking-wider: 0.05em; /* Loose, all-caps headlines */
+
+  /* ==========================================================================
+     FONT FAMILIES
+     ========================================================================== */
+  /* Define once, use everywhere. */
+  
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: ui-serif, Georgia, "Palatino Linotype", serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-body: "Helvetica Neue", system-ui, sans-serif; /* Primary body font */
+  --font-heading: PARISREBEL, Georgia, serif; /* Heading font */
+
+  /* ==========================================================================
+     COLORS
+     ========================================================================== */
+  /* RGB format for opacity flexibility. All colors support rgba(var(--color-X) / opacity) syntax. */
+  
+  /* 
+   * CONTRAST RATIO TESTING (WCAG AA Compliance)
+   * 
+   * Test these combinations and document results:
+   * - ink on surface: [TEST & DOCUMENT - Should be WCAG AA ✓]
+   * - ink-muted on surface: [TEST & DOCUMENT - May need adjustment]
+   * - accent on surface: [TEST & DOCUMENT - Should be WCAG AA ✓]
+   * - accent text on white: [TEST & DOCUMENT - Should be WCAG AA ✓]
+   * 
+   * Use tools like WebAIM Contrast Checker or browser DevTools
+   * Target: 4.5:1 for normal text, 3:1 for large text (WCAG AA)
+   */
+  
+  /* Primary text/foreground */
+  --color-ink: 10 26 47; /* Deep Navy - Primary text */
+
+  /* Secondary/lighter text */
+  --color-ink-muted: 10 26 47 / 0.6; /* 60% opacity - Secondary text */
+
+  /* Backgrounds */
+  --color-surface: 10 26 47; /* Deep Navy - Page/card backgrounds */
+  --color-surface-dark: 8 20 38; /* Slightly darker Deep Navy variant */
+
+  /* Borders and dividers */
+  --color-border: 74 143 121; /* Cool Mint Reef - Border/divider */
+
+  /* Primary interactive color */
+  --color-accent: 15 59 48; /* Bottle Green - CTAs, hover states, focus */
+  --color-accent-muted: 15 59 48 / 0.15; /* Muted accent for backgrounds */
+
+  /* Additional brand colors */
+  --color-cream: 242 232 213;
+  --color-secondary: 58 95 122;
+
+  /* Status colors */
+  --color-success: 34 197 94; /* #22C55E - Positive actions, confirmations */
+  --color-warning: 239 68 68; /* #EF4444 - Warnings, cautions */
+  --color-error: 220 38 38; /* #DC2626 - Errors, destructive actions */
+
+  /* ==========================================================================
+     SHADOWS
+     ========================================================================== */
+  /* Named elevation system. Use for depth hierarchy. Sharp, minimal shadows. */
+  
+  --shadow-none: 0 0 #0000;
+  --shadow-sm: 0 1px 1px rgba(0, 0, 0, 0.05);
+  --shadow-base: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 6px 9px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 12px 15px rgba(0, 0, 0, 0.15);
+
+  /* ==========================================================================
+     BORDER RADIUS
+     ========================================================================== */
+  /* Corner treatment scale. No random radius values. */
+  
+  --radius-none: 0; /* Sharp corners (rare) */
+  --radius-sm: 2px; /* Tight corners */
+  --radius-md: 5px; /* Default inputs/small elements */
+  --radius-lg: 10px; /* Most components */
+  --radius-xl: 12px; /* Cards, larger components */
+  --radius-2xl: 18px; /* Page containers, hero sections */
+  --radius-full: 9999px; /* Fully rounded - Badges, pills, avatars */
+
+  /* ==========================================================================
+     TRANSITIONS & ANIMATIONS
+     ========================================================================== */
+  /* Speed and easing presets. All animations use these. */
+  
+  /* DURATIONS - Animation speed presets */
+  --duration-75: 75ms;
+  --duration-100: 100ms;
+  --duration-150: 150ms; /* Fast interactions - hover, quick feedback */
+  --duration-200: 200ms; /* Standard interactions */
+  --duration-300: 300ms; /* Moderate transitions */
+  --duration-500: 500ms; /* Slower transitions - modals, page changes */
+  --duration-700: 700ms; /* Very slow - use sparingly */
+  --duration-1000: 1000ms; /* Full second - rare cases only */
+
+  /* EASING FUNCTIONS - Timing curves */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1); /* Accelerating entrance */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1); /* Decelerating exit */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1); /* Smooth both ways */
+
+  /* ==========================================================================
+     BREAKPOINTS
+     ========================================================================== */
+  /* Mobile-first approach. Document why each breakpoint matters. */
+  
+  /*
+  Mobile-first means we design for mobile first, then enhance for larger screens.
+
+  No prefix (mobile): 0px+ - Default styles, mobile devices
+  sm: 640px - Large phones in landscape
+  md: 768px - Tablets
+  lg: 1024px - Small laptops / tablets in landscape
+  xl: 1280px - Standard desktop / MacBook
+  2xl: 1536px - Large desktop monitors
+
+  Use in CSS like:
+  @media (min-width: 768px) { ... } /* md breakpoint */
+  @media (min-width: 1024px) { ... } /* lg breakpoint */
+  */
+
+  /* ==========================================================================
+     OPACITY PRESETS
+     ========================================================================== */
+  /* Standardized opacity values */
+  
+  --opacity-0: 0;
+  --opacity-5: 0.05;
+  --opacity-10: 0.1;
+  --opacity-20: 0.2;
+  --opacity-25: 0.25;
+  --opacity-30: 0.3;
+  --opacity-40: 0.4;
+  --opacity-50: 0.5;
+  --opacity-60: 0.6;
+  --opacity-70: 0.7;
+  --opacity-75: 0.75;
+  --opacity-80: 0.8;
+  --opacity-90: 0.9;
+  --opacity-95: 0.95;
+  --opacity-100: 1;
+}
+

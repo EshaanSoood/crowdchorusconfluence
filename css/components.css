@@ -1,0 +1,1448 @@
+/**
+ * Components CSS - Baseline Component Patterns
+ * 
+ * This file provides baseline component classes that prevent common mistakes
+ * and establish consistent patterns. These are foundational components that
+ * should be extended or customized as needed.
+ * 
+ * Import order:
+ * 1. tokens.css
+ * 2. reset.css (imports tokens.css)
+ * 3. globals.css (imports tokens.css and reset.css)
+ * 4. components.css (this file - imports tokens.css)
+ * 5. utilities.css (edge cases only)
+ */
+
+/**
+ * Components layer for Tailwind CSS
+ * Styles in this layer will be applied after base but before utilities
+ */
+@layer components {
+  /* ==========================================================================
+     SITE CONTAINER - Main page wrapper
+     ========================================================================== */
+
+  .site-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xlarge);
+    padding: var(--space-medium);
+    background-color: rgb(var(--color-surface));
+  }
+
+  @media (min-width: 768px) {
+    .site-container {
+      padding: var(--space-huge);
+      gap: var(--space-huge);
+    }
+  }
+
+  /**
+   * Button baseline component
+   * Prevents padding/sizing chaos and establishes consistent button patterns
+   * 
+   * Usage:
+   * <button class="btn">Click me</button>
+   * 
+   * Extend with modifiers:
+   * .btn-primary, .btn-secondary, .btn-outline, etc.
+   */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-small-plus) var(--space-medium);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    line-height: var(--leading-normal);
+    transition: all var(--duration-200) var(--ease-out);
+    cursor: pointer;
+    border: none;
+    background-color: rgb(var(--color-accent));
+    color: white;
+    text-decoration: none; /* For when used as <a class="btn"> */
+  }
+
+  /**
+   * Button hover state
+   * Only applies when button is not disabled
+   */
+  .btn:hover:not(:disabled) {
+    opacity: var(--opacity-90);
+  }
+
+  /**
+   * Button focus-visible state (accessibility)
+   * WCAG 2.4.7 Focus Visible
+   */
+  .btn:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 2px;
+  }
+
+  /**
+   * Button disabled state
+   */
+  .btn:disabled {
+    opacity: var(--opacity-50);
+    cursor: not-allowed;
+  }
+
+  /**
+   * Input baseline component
+   * Prevents inconsistent input styling and establishes form patterns
+   * 
+   * Usage:
+   * <input type="text" class="input" placeholder="Enter text">
+   * <textarea class="input"></textarea>
+   */
+  .input {
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid rgb(var(--color-border));
+    border-radius: var(--radius-md);
+    background-color: rgb(var(--color-surface));
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: rgb(var(--color-cream));
+    width: 100%; /* Default to full width, override as needed */
+    transition: border-color var(--duration-200) var(--ease-out);
+  }
+
+  /**
+   * Input focus-visible state (accessibility)
+   * WCAG 2.4.7 Focus Visible
+   */
+  .input:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 2px;
+    border-color: rgb(var(--color-accent));
+  }
+
+  /**
+   * Input placeholder styling
+   */
+  .input::placeholder {
+    color: rgb(var(--color-cream) / 0.6);
+  }
+
+  /**
+   * Input disabled state
+   */
+  .input:disabled {
+    opacity: var(--opacity-50);
+    cursor: not-allowed;
+    background-color: rgb(var(--color-surface-dark));
+  }
+
+  /* ==========================================================================
+     ARTISTIC BUTTON - Pronounced wavy border, simple hover animation
+     ========================================================================== */
+
+  .btn-artistic {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-small-plus) var(--space-medium-plus);
+    font-family: var(--font-body);
+    font-weight: bold;
+    font-size: var(--text-base);
+    cursor: pointer;
+    border: 2px solid rgb(var(--color-border));
+    background-color: rgb(var(--color-accent));
+    color: rgb(var(--color-cream));
+    border-radius: var(--radius-lg);
+    transition: all var(--duration-200) var(--ease-out);
+    overflow: visible;
+    text-decoration: none; /* For when used as <a class="btn-artistic"> */
+  }
+
+  /**
+   * Pronounced wavy border effect using SVG clip-path
+   * Creates noticeable waves without affecting text legibility
+   */
+  .btn-artistic::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: transparent;
+    border: 2px solid rgb(var(--color-border));
+    border-radius: var(--radius-lg);
+    pointer-events: none;
+    clip-path: polygon(
+      0% 20%, 1% 15%, 2% 20%, 3% 15%, 4% 20%, 5% 15%, 6% 20%, 7% 15%, 8% 20%,
+      9% 15%, 10% 20%, 11% 15%, 12% 20%, 13% 15%, 14% 20%, 15% 15%, 16% 20%,
+      17% 15%, 18% 20%, 19% 15%, 20% 20%, 21% 15%, 22% 20%, 23% 15%, 24% 20%,
+      25% 15%, 26% 20%, 27% 15%, 28% 20%, 29% 15%, 30% 20%, 31% 15%, 32% 20%,
+      33% 15%, 34% 20%, 35% 15%, 36% 20%, 37% 15%, 38% 20%, 39% 15%, 40% 20%,
+      41% 15%, 42% 20%, 43% 15%, 44% 20%, 45% 15%, 46% 20%, 47% 15%, 48% 20%,
+      49% 15%, 50% 20%, 51% 15%, 52% 20%, 53% 15%, 54% 20%, 55% 15%, 56% 20%,
+      57% 15%, 58% 20%, 59% 15%, 60% 20%, 61% 15%, 62% 20%, 63% 15%, 64% 20%,
+      65% 15%, 66% 20%, 67% 15%, 68% 20%, 69% 15%, 70% 20%, 71% 15%, 72% 20%,
+      73% 15%, 74% 20%, 75% 15%, 76% 20%, 77% 15%, 78% 20%, 79% 15%, 80% 20%,
+      81% 15%, 82% 20%, 83% 15%, 84% 20%, 85% 15%, 86% 20%, 87% 15%, 88% 20%,
+      89% 15%, 90% 20%, 91% 15%, 92% 20%, 93% 15%, 94% 20%, 95% 15%, 96% 20%,
+      97% 15%, 98% 20%, 99% 15%, 100% 20%,
+      100% 80%, 99% 85%, 98% 80%, 97% 85%, 96% 80%, 95% 85%, 94% 80%, 93% 85%,
+      92% 80%, 91% 85%, 90% 80%, 89% 85%, 88% 80%, 87% 85%, 86% 80%, 85% 85%,
+      84% 80%, 83% 85%, 82% 80%, 81% 85%, 80% 80%, 79% 85%, 78% 80%, 77% 85%,
+      76% 80%, 75% 85%, 74% 80%, 73% 85%, 72% 80%, 71% 85%, 70% 80%, 69% 85%,
+      68% 80%, 67% 85%, 66% 80%, 65% 85%, 64% 80%, 63% 85%, 62% 80%, 61% 85%,
+      60% 80%, 59% 85%, 58% 80%, 57% 85%, 56% 80%, 55% 85%, 54% 80%, 53% 85%,
+      52% 80%, 51% 85%, 50% 80%, 49% 85%, 48% 80%, 47% 85%, 46% 80%, 45% 85%,
+      44% 80%, 43% 85%, 42% 80%, 41% 85%, 40% 80%, 39% 85%, 38% 80%, 37% 85%,
+      36% 80%, 35% 85%, 34% 80%, 33% 85%, 32% 80%, 31% 85%, 30% 80%, 29% 85%,
+      28% 80%, 27% 85%, 26% 80%, 25% 85%, 24% 80%, 23% 85%, 22% 80%, 21% 85%,
+      20% 80%, 19% 85%, 18% 80%, 17% 85%, 16% 80%, 15% 85%, 14% 80%, 13% 85%,
+      12% 80%, 11% 85%, 10% 80%, 9% 85%, 8% 80%, 7% 85%, 6% 80%, 5% 85%,
+      4% 80%, 3% 85%, 2% 80%, 1% 85%, 0% 80%,
+      0% 50%, 5% 45%, 10% 50%, 15% 45%, 20% 50%, 25% 45%, 30% 50%, 35% 45%,
+      40% 50%, 45% 45%, 50% 50%, 55% 45%, 60% 50%, 65% 45%, 70% 50%, 75% 45%,
+      80% 50%, 85% 45%, 90% 50%, 95% 45%, 100% 50%
+    );
+  }
+
+  /**
+   * Artistic button hover state
+   * Background changes to Maritime Blue, text changes to Deep Navy
+   */
+  .btn-artistic:hover:not(:disabled) {
+    background-color: rgb(var(--color-secondary));
+    color: rgb(var(--color-cream));
+    border-color: rgb(var(--color-secondary));
+    transform: translateY(-2px);
+  }
+
+  .btn-artistic:hover:not(:disabled)::before {
+    border-color: rgb(var(--color-secondary));
+  }
+
+  /**
+   * Artistic button focus state
+   */
+  .btn-artistic:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 2px;
+  }
+
+  /**
+   * Artistic button disabled state
+   */
+  .btn-artistic:disabled {
+    opacity: var(--opacity-50);
+    cursor: not-allowed;
+  }
+
+  /* ==========================================================================
+     HEADER - Logo + centered nav + right CTA
+     ========================================================================== */
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-medium) var(--space-huge);
+    background-color: rgb(var(--color-accent));
+    border-radius: var(--radius-lg);
+    gap: var(--space-xlarge);
+  }
+
+  /**
+   * Header logo container
+   * Logo is tinted cream with thin bottle green stroke
+   */
+  .header-logo {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-small-plus);
+  }
+
+  .header-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: 
+      invert(1) brightness(1.2)
+      drop-shadow(1px 0 0 rgb(var(--color-border)))
+      drop-shadow(-1px 0 0 rgb(var(--color-border)))
+      drop-shadow(0 1px 0 rgb(var(--color-border)))
+      drop-shadow(0 -1px 0 rgb(var(--color-border)));
+  }
+
+  /**
+   * Header navigation
+   * Centered nav links in cream, bold Helvetica
+   */
+  .header-nav {
+    display: flex;
+    gap: var(--space-xlarge);
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .header-nav a {
+    color: rgb(var(--color-cream));
+    text-decoration: none;
+    font-weight: bold;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    text-transform: none; /* Preserve capitalization */
+    transition: opacity var(--duration-200) var(--ease-out);
+  }
+
+  .header-nav a:hover {
+    opacity: var(--opacity-80);
+  }
+
+  .header-nav a:focus-visible {
+    outline: 2px solid rgb(var(--color-cream));
+    outline-offset: 2px;
+  }
+
+  /**
+   * Header CTA button
+   * Maritime Blue background, simple and clean
+   */
+  .header-cta {
+    background-color: rgb(var(--color-secondary));
+    color: rgb(var(--color-cream));
+    padding: var(--space-small-plus) var(--space-medium-plus);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    font-weight: bold;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    border: none;
+    cursor: pointer;
+    transition: all var(--duration-200) var(--ease-out);
+    flex-shrink: 0;
+  }
+
+  .header-cta:hover {
+    opacity: var(--opacity-90);
+    transform: translateY(-2px);
+  }
+
+  .header-cta:focus-visible {
+    outline: 2px solid rgb(var(--color-cream));
+    outline-offset: 2px;
+  }
+
+  /* ==========================================================================
+     FOOTER - Slim row with logo, text, and links
+     ========================================================================== */
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-large) var(--space-huge);
+    background-color: rgb(var(--color-accent));
+    border-radius: var(--radius-lg);
+    gap: var(--space-xlarge);
+  }
+
+  /**
+   * Footer content wrapper
+   */
+  .footer-content {
+    display: flex;
+    gap: var(--space-medium-plus);
+    align-items: center;
+    flex: 1;
+  }
+
+  .footer-logo {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: 
+      invert(1) brightness(1.2)
+      drop-shadow(0.5px 0 0 rgb(var(--color-border)))
+      drop-shadow(-0.5px 0 0 rgb(var(--color-border)));
+  }
+
+  /**
+   * Footer text
+   */
+  .footer-text {
+    color: rgb(var(--color-cream));
+    font-size: var(--text-sm);
+    font-family: var(--font-body);
+    font-weight: bold;
+    margin: 0;
+  }
+
+  /**
+   * Footer links
+   */
+  .footer-links {
+    display: flex;
+    gap: var(--space-large);
+    margin-left: auto;
+  }
+
+  .footer-links a {
+    color: rgb(var(--color-cream));
+    text-decoration: none;
+    font-size: var(--text-sm);
+    font-weight: bold;
+    font-family: var(--font-body);
+    transition: opacity var(--duration-200) var(--ease-out);
+  }
+
+  .footer-links a:hover {
+    opacity: var(--opacity-80);
+  }
+
+  .footer-links a:focus-visible {
+    outline: 2px solid rgb(var(--color-cream));
+    outline-offset: 2px;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE RULES - Mobile-first adjustments for header and footer
+     ========================================================================== */
+
+  /**
+   * Mobile breakpoint: screens smaller than 768px
+   * Stacks header/footer vertically, reduces padding/gaps for mobile devices
+   */
+  @media (max-width: 767px) {
+    /**
+     * Header mobile layout
+     * Changes from horizontal to vertical stacking
+     */
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: var(--space-medium) var(--space-medium);
+      gap: var(--space-medium);
+    }
+
+    /**
+     * Header logo stays same size but may need adjustment
+     */
+    .header-logo {
+      width: 50px;
+      height: 50px;
+    }
+
+    /**
+     * Header nav wraps and stacks on mobile
+     */
+    .header-nav {
+      width: 100%;
+      flex-direction: column;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: var(--space-small-plus);
+      align-items: flex-start;
+    }
+
+    .header-nav a {
+      font-size: var(--text-sm);
+    }
+
+    /**
+     * Header CTA button takes up available space or stays inline
+     */
+    .header-cta {
+      width: 100%;
+      align-self: flex-start;
+    }
+
+    /**
+     * Footer mobile layout
+     * Stacks vertically instead of horizontal
+     */
+    .footer {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: var(--space-medium) var(--space-medium);
+      gap: var(--space-medium);
+    }
+
+    /**
+     * Footer logo smaller on mobile
+     */
+    .footer-logo {
+      width: 35px;
+      height: 35px;
+    }
+
+    /**
+     * Footer content stacks vertically
+     */
+    .footer-content {
+      width: 100%;
+      flex-direction: column;
+      gap: var(--space-small);
+    }
+
+    /**
+     * Footer links stack vertically instead of horizontal
+     */
+    .footer-links {
+      width: 100%;
+      flex-direction: column;
+      gap: var(--space-small);
+      margin-left: 0;
+      align-items: flex-start;
+    }
+
+    .footer-links a {
+      font-size: var(--text-xs);
+    }
+
+    /**
+     * Footer text smaller on mobile
+     */
+    .footer-text {
+      font-size: var(--text-xs);
+    }
+  }
+
+  /**
+   * Tablet/larger screens: 768px and up
+   * Revert to horizontal layout (default styles apply)
+   */
+  @media (min-width: 768px) {
+    .header,
+    .footer {
+      /* Default styles apply (flex-direction: row, full padding, etc.) */
+    }
+  }
+
+  /* ==========================================================================
+     HERO - Cream tie-dye background with brand colors (simplified)
+     ========================================================================== */
+
+  .hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-2xl);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding: var(--space-large) var(--space-medium);
+    margin-top: calc(-1 * var(--space-xlarge)); /* counteract site-container gap */
+    /* Cream background as base */
+    background-color: rgb(var(--color-cream));
+
+    /* Tie-dye style blobs — fallback for browsers without color-mix() */
+    background-image:
+      radial-gradient(
+        circle at 15% 20%,
+        rgba(58, 95, 122, 0.35),
+        transparent 60%
+      ),
+      radial-gradient(
+        circle at 85% 15%,
+        rgba(74, 143, 121, 0.40),
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 15% 80%,
+        rgba(74, 143, 121, 0.20),
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 85% 85%,
+        rgba(58, 95, 122, 0.20),
+        transparent 60%
+      );
+
+    box-shadow: var(--shadow-lg);
+    color: rgb(var(--color-ink));
+  }
+
+  /* Modern browsers with color-mix() support override the fallback */
+  @supports (color-mix(in srgb, white, black)) {
+    .hero {
+      background-image:
+        radial-gradient(
+          circle at 15% 20%,
+          color-mix(in srgb, rgb(var(--color-secondary)) 35%, rgb(var(--color-cream)) 65%),
+          transparent 60%
+        ),
+        radial-gradient(
+          circle at 85% 15%,
+          color-mix(in srgb, rgb(var(--color-border)) 40%, rgb(var(--color-cream)) 60%),
+          transparent 55%
+        ),
+        radial-gradient(
+          circle at 15% 80%,
+          color-mix(in srgb, rgb(var(--color-border)) 20%, rgb(var(--color-cream)) 80%),
+          transparent 55%
+        ),
+        radial-gradient(
+          circle at 85% 85%,
+          color-mix(in srgb, rgb(var(--color-secondary)) 20%, rgb(var(--color-cream)) 80%),
+          transparent 60%
+        );
+    }
+  }
+
+  .hero-inner {
+    max-width: 60rem;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-small-plus);
+    text-align: center;
+  }
+
+  .hero-title {
+    font-family: var(--font-heading); /* PARISREBEL */
+    font-size: var(--text-4xl);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    text-transform: none;
+    font-weight: normal;
+
+    /* Navy with a cream "stroke" via text-shadow */
+    color: rgb(var(--color-ink));
+    text-shadow:
+      0 0 2px rgb(var(--color-cream)),
+      0 0 6px rgb(var(--color-cream)),
+      0 0 8px rgb(var(--color-cream));
+
+    margin: 0;
+  }
+
+  .hero-tagline {
+    font-family: var(--font-body); /* Helvetica Neue */
+    font-weight: bold;
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+    color: rgb(var(--color-ink));
+    text-transform: none;
+    margin: 0;
+  }
+
+  @media (max-width: 767px) {
+    .hero-title {
+      font-size: var(--text-3xl);
+    }
+
+    .hero-tagline {
+      font-size: var(--text-lg);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      padding-block: var(--space-large); /* around ~1.5rem vertically */
+      padding-inline: var(--space-huge); /* keep horizontal space */
+      margin-top: calc(-1 * var(--space-huge)); /* counteract site-container gap on desktop */
+    }
+
+    .hero-title {
+      font-size: var(--text-6xl);
+    }
+
+    .hero-tagline {
+      font-size: var(--text-2xl);
+    }
+  }
+
+  /* ==========================================================================
+
+     DIVIDER - Horizontal rule component in three variants
+
+     ========================================================================== */
+
+  /**
+
+   * Divider base component
+
+   * Uses Maritime Blue (light blue) color from design tokens
+
+   * Default medium spacing variant
+
+   */
+
+  hr,
+
+  .divider {
+
+    margin: var(--space-large) 0;
+
+    border: 0;
+
+    border-top: 1px solid rgb(var(--color-secondary));
+
+    height: 0;
+
+    background: transparent;
+
+  }
+
+  /**
+
+   * Divider small variant
+
+   * Compact spacing - use in tight layouts or between small sections
+
+   */
+
+  .divider-small {
+
+    margin: var(--space-medium) 0;
+
+    border: 0;
+
+    border-top: 1px solid rgb(var(--color-secondary));
+
+    height: 0;
+
+    background: transparent;
+
+  }
+
+  /**
+
+   * Divider medium variant (default)
+
+   * Standard spacing - use for most content sections
+
+   */
+
+  .divider-medium {
+
+    margin: var(--space-large) 0;
+
+    border: 0;
+
+    border-top: 1px solid rgb(var(--color-secondary));
+
+    height: 0;
+
+    background: transparent;
+
+  }
+
+  /**
+
+   * Divider large variant
+
+   * Generous spacing - use for major section breaks or visual emphasis
+
+   */
+
+  .divider-large {
+
+    margin: var(--space-huge) 0;
+
+    border: 0;
+
+    border-top: 1px solid rgb(var(--color-secondary));
+
+    height: 0;
+
+    background: transparent;
+
+  }
+
+  /* ==========================================================================
+
+     CONTENT SECTIONS - Homepage content styling
+
+     ========================================================================== */
+
+  /**
+
+   * Content section wrapper
+
+   * Main container for homepage content below hero
+
+   */
+
+  .content-section {
+
+    max-width: 800px;
+
+    margin: 0 auto;
+
+    padding: var(--space-huge) var(--space-large);
+
+  }
+
+  /**
+
+   * Content block
+
+   * Individual content sections with consistent spacing
+
+   */
+
+  .content-block {
+
+    margin: 0;
+
+  }
+
+  /**
+
+   * Brand heading
+
+   * Uses PARISREBEL font for brand feel
+
+   */
+
+  .heading-brand {
+
+    font-family: var(--font-heading);
+
+    font-size: var(--text-3xl);
+
+    font-weight: bold;
+
+    color: rgb(var(--color-cream));
+
+    margin: 0 0 var(--space-large) 0;
+
+    line-height: var(--leading-tight);
+
+  }
+
+  /**
+
+   * Content paragraphs
+
+   */
+
+  .content-section p {
+
+    font-family: var(--font-body);
+
+    font-size: var(--text-base);
+
+    line-height: var(--leading-relaxed);
+
+    color: rgb(var(--color-cream));
+
+    margin: 0;
+
+  }
+
+  /* ==========================================================================
+
+     FAQ SECTION - Frequently Asked Questions styling
+
+     ========================================================================== */
+
+  /**
+
+   * FAQ section wrapper
+
+   */
+
+  .faq-section {
+
+    margin-top: var(--space-huge);
+
+  }
+
+  /**
+
+   * FAQ item - individual question/answer pair
+
+   */
+
+  .faq-item {
+
+    margin: var(--space-large) 0;
+
+  }
+
+  /**
+
+   * FAQ question
+
+   * Bold Helvetica with styled Q: prefix
+
+   */
+
+  .faq-question {
+
+    font-family: var(--font-body);
+
+    font-size: var(--text-base);
+
+    font-weight: bold;
+
+    color: rgb(var(--color-cream));
+
+    margin: 0 0 var(--space-medium) 0;
+
+    line-height: var(--leading-normal);
+
+  }
+
+  /**
+
+   * FAQ Q: prefix
+
+   * Uses brand light green (Bottle Green) with light blue underline
+
+   */
+
+  .faq-q {
+
+    color: rgb(var(--color-accent));
+
+    text-decoration: underline;
+
+    text-decoration-color: rgb(var(--color-secondary));
+
+    text-decoration-thickness: 2px;
+
+    text-underline-offset: 2px;
+
+    margin-right: var(--space-tiny);
+
+  }
+
+  /**
+
+   * FAQ answer
+
+   * Normal Helvetica, readable line-height
+
+   */
+
+  .faq-answer {
+
+    font-family: var(--font-body);
+
+    font-size: var(--text-base);
+
+    font-weight: normal;
+
+    color: rgb(var(--color-cream));
+
+    line-height: var(--leading-relaxed);
+
+    margin: 0;
+
+  }
+
+  /**
+
+   * CTA container
+
+   * Centers the inquire button
+
+   */
+
+  .cta-container {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: var(--space-large);
+
+    padding: var(--space-large) 0;
+
+  }
+
+  /* ==========================================================================
+
+     CONTACT PAGE
+
+     ========================================================================== */
+
+  .contact-intro {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--space-medium);
+
+  }
+
+  .contact-intro p {
+
+    font-family: var(--font-body);
+
+    font-size: var(--text-base);
+
+    line-height: var(--leading-relaxed);
+
+    color: rgb(var(--color-cream));
+
+  }
+
+  .contact-intro a {
+
+    text-decoration: underline;
+
+  }
+
+  .contact-form {
+
+    margin-top: var(--space-huge);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--space-large);
+
+  }
+
+  .contact-field-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--space-medium);
+
+  }
+
+  @media (min-width: 768px) {
+
+    .contact-field-group--two-column {
+
+      flex-direction: row;
+
+      gap: var(--space-large);
+
+    }
+
+  }
+
+  .contact-field {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--space-small);
+
+    flex: 1;
+
+  }
+
+  .contact-label {
+
+    font-family: var(--font-body);
+
+    font-size: var(--text-sm);
+
+    font-weight: bold;
+
+    color: rgb(var(--color-cream));
+
+  }
+
+  .contact-input {
+
+    background-color: rgb(var(--color-secondary) / var(--opacity-80));
+
+    color: rgb(var(--color-accent));
+
+  }
+
+  .contact-input::placeholder {
+
+    color: rgb(var(--color-accent));
+
+  }
+
+  .contact-help {
+
+    font-family: var(--font-body);
+
+    font-size: var(--text-xs);
+
+    color: rgb(var(--color-cream));
+
+  }
+
+  .contact-submit-row {
+
+    display: flex;
+
+    justify-content: flex-start;
+
+  }
+
+  .contact-thankyou {
+
+    margin-top: var(--space-huge);
+
+    text-align: center;
+
+  }
+
+  /* ==========================================================================
+
+     ARTISTS SECTION - Managed Artists Grid
+
+     ========================================================================== */
+
+
+
+  .artists-section {
+
+    padding: var(--space-huge) var(--space-large);
+
+  }
+
+
+
+  .artists-header {
+
+    max-width: 720px;
+
+    margin: 0 auto var(--space-xlarge);
+
+    text-align: center;
+
+  }
+
+
+
+  .artists-kicker {
+
+    font-family: var(--font-body);
+
+    font-size: var(--text-xs);
+
+    letter-spacing: var(--tracking-wider);
+
+    text-transform: uppercase;
+
+    color: rgb(var(--color-cream));
+
+    margin: 0 0 var(--space-small);
+
+  }
+
+
+
+  .artists-title {
+
+    /* Use brand heading style but keep it local */
+
+    font-family: var(--font-heading);
+
+    font-size: var(--text-3xl);
+
+    line-height: var(--leading-tight);
+
+    margin: 0 0 var(--space-medium);
+
+    color: rgb(var(--color-cream));
+
+  }
+
+
+
+  .artists-subtitle {
+
+    font-family: var(--font-body);
+
+    font-size: var(--text-base);
+
+    line-height: var(--leading-relaxed);
+
+    color: rgb(var(--color-cream));
+
+    margin: 0;
+
+  }
+
+
+
+  .artists-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: var(--space-large-plus);
+
+  }
+
+
+
+  @media (min-width: 768px) {
+
+    .artists-grid {
+
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    }
+
+  }
+
+
+
+  @media (min-width: 1024px) {
+
+    .artists-grid {
+
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    }
+
+  }
+
+
+
+  .artist-card {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--space-medium);
+
+    padding: var(--space-large);
+
+    background-color: rgb(var(--color-surface-dark));
+
+    border-radius: var(--radius-lg);
+
+    border: 1px solid rgb(var(--color-border));
+
+    box-shadow: var(--shadow-md);
+
+    height: 100%;
+
+  }
+
+
+
+  .artist-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: var(--space-medium);
+
+  }
+
+
+
+  .artist-avatar {
+
+    width: 64px;
+
+    height: 64px;
+
+    border-radius: 999px;
+
+    object-fit: cover;
+
+    border: 2px solid rgb(var(--color-border));
+
+  }
+
+
+
+  .artist-meta {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--space-tiny);
+
+  }
+
+
+
+  .artist-name {
+
+    font-family: var(--font-body);
+
+    font-size: var(--text-lg);
+
+    font-weight: bold;
+
+    color: rgb(var(--color-cream));
+
+    margin: 0;
+
+  }
+
+
+
+  .artist-tagline {
+
+    font-family: var(--font-body);
+
+    font-size: var(--text-sm);
+
+    color: rgb(var(--color-cream) / 0.6);
+
+    margin: 0;
+
+  }
+
+
+
+  .artist-genre-location {
+
+    font-family: var(--font-body);
+
+    font-size: var(--text-xs);
+
+    text-transform: uppercase;
+
+    letter-spacing: var(--tracking-wide);
+
+    color: rgb(var(--color-cream));
+
+  }
+
+
+
+  .artist-body {
+
+    font-family: var(--font-body);
+
+    font-size: var(--text-sm);
+
+    line-height: var(--leading-relaxed);
+
+    color: rgb(var(--color-cream));
+
+  }
+
+
+
+  .artist-body p {
+
+    margin: 0 0 var(--space-small);
+
+  }
+
+
+
+  .artist-body p:last-child {
+
+    margin-bottom: 0;
+
+  }
+
+
+
+  .artist-details {
+
+    margin-top: var(--space-small-plus);
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: var(--space-tiny);
+
+    font-size: var(--text-xs);
+
+  }
+
+
+
+  .artist-detail-label {
+
+    font-weight: bold;
+
+    color: rgb(var(--color-cream));
+
+  }
+
+
+
+  .artist-detail-value {
+
+    color: rgb(var(--color-cream) / 0.6);
+
+  }
+
+
+
+  .artist-links {
+
+    margin-top: auto;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: var(--space-small);
+
+  }
+
+
+
+  .artist-link {
+
+    font-family: var(--font-body);
+
+    font-size: var(--text-xs);
+
+    text-transform: uppercase;
+
+    letter-spacing: var(--tracking-wide);
+
+    padding: var(--space-tiny) var(--space-small-plus);
+
+    border-radius: var(--radius-full);
+
+    border: 1px solid rgb(var(--color-border));
+
+    color: rgb(var(--color-cream));
+
+    text-decoration: none;
+
+    background-color: rgb(var(--color-accent-muted));
+
+    transition: background-color var(--duration-200) var(--ease-out),
+
+                transform var(--duration-200) var(--ease-out),
+
+                box-shadow var(--duration-200) var(--ease-out);
+
+  }
+
+
+
+  .artist-link:hover,
+
+  .artist-link:focus-visible {
+
+    background-color: rgb(var(--color-accent));
+
+    box-shadow: var(--shadow-lg);
+
+    transform: translateY(-1px);
+
+  }
+}
+

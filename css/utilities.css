@@ -1,0 +1,81 @@
+/**
+ * Utilities CSS - Edge Cases Only
+ * 
+ * This file is for utility classes that don't fit into components
+ * but are needed for specific edge cases or one-off situations.
+ * 
+ * IMPORTANT: Use sparingly. Most styling should come from:
+ * 1. Design tokens (tokens.css)
+ * 2. Base styles (globals.css)
+ * 3. Components (components.css)
+ * 4. Tailwind utility classes (if using Tailwind)
+ * 
+ * Only add utilities here when absolutely necessary.
+ * 
+ * Import order:
+ * 1. tokens.css
+ * 2. reset.css (imports tokens.css)
+ * 3. globals.css (imports tokens.css and reset.css)
+ * 4. components.css (imports tokens.css)
+ * 5. utilities.css (this file - imports tokens.css)
+ */
+
+/**
+ * Utilities layer for Tailwind CSS
+ * Styles in this layer will be applied last, allowing overrides
+ */
+@layer utilities {
+  /**
+   * Screen reader only
+   * Hide content visually but keep it accessible to screen readers
+   * 
+   * Usage:
+   * <span class="sr-only">Additional context for screen readers</span>
+   */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /**
+   * Not screen reader only
+   * Reverse the sr-only class when needed
+   */
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  /**
+   * Focus visible only
+   * Show focus styles only when keyboard navigating
+   * Useful for custom focus styles that differ from default
+   */
+  .focus-visible-only:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /**
+   * Clearfix utility
+   * For legacy float-based layouts (use sparingly - prefer flexbox/grid)
+   */
+  .clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+

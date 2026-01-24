@@ -1,0 +1,451 @@
+/**
+ * Reset CSS - Foundation for Tailwind + HyperUI
+ * 
+ * This file provides a solid CSS foundation following the proven normalize.css pattern (v3.0.3).
+ * It ensures consistent rendering across browsers and provides a clean slate for Tailwind CSS
+ * and HyperUI component styling.
+ */
+
+/* ==========================================================================
+   1. RESET FOR ALL ELEMENTS
+   ========================================================================== */
+
+/**
+ * Box-sizing: border-box
+ * 
+ * Prevents layout breakage from padding/borders.
+ * Example: width: 100px + padding: 10px = 100px (not 120px)
+ * This is the only sensible default.
+ * 
+ * Ensures padding and borders are included in element width/height,
+ * making sizing predictable and preventing layout surprises.
+ */
+* {
+  box-sizing: border-box;
+}
+
+/**
+ * HTML5 display definitions
+ * Ensures consistent font rendering and prevents text size adjustment on mobile
+ */
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+/**
+ * Remove default margin and padding from body
+ * Provides a clean starting point for layout
+ */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================================================
+   2. HTML5 ELEMENTS
+   ========================================================================== */
+
+/**
+ * Ensure HTML5 elements display as block-level elements
+ * Older browsers may not recognize these elements by default
+ */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+ * Media elements should display inline-block with baseline alignment
+ * Ensures consistent rendering across browsers
+ */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+/**
+ * Hide audio elements without controls
+ * Prevents empty space from appearing
+ */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Hide hidden elements and template elements
+ * Ensures proper display behavior
+ */
+[hidden],
+template {
+  display: none;
+}
+
+/* ==========================================================================
+   3. FORM ELEMENTS
+   ========================================================================== */
+
+/**
+ * Normalize form elements for consistent styling
+ * Inherit font and color to prevent browser defaults from interfering
+ */
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Buttons should show overflow content
+ * Prevents text clipping in buttons
+ */
+button {
+  overflow: visible;
+}
+
+/**
+ * Remove text transformation from buttons and selects
+ * Prevents unwanted uppercase/lowercase transformations
+ */
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * Apply button appearance and cursor pointer
+ * Ensures buttons look clickable and behave consistently
+ */
+button,
+html input[type="button"],
+input[type="reset"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+/**
+ * Disabled form elements should show default cursor
+ * Provides visual feedback for disabled state
+ */
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * Checkbox and radio inputs should use border-box
+ * Ensures consistent sizing with padding
+ */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/**
+ * Remove default search input appearance
+ * Allows for custom styling
+ */
+input[type="search"] {
+  -webkit-appearance: none;
+}
+
+/**
+ * Normalize fieldset styling
+ * Provides consistent borders and spacing
+ */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * Remove border and padding from legend
+ * Provides clean styling for fieldset labels
+ */
+legend {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * Textarea overflow and resize behavior
+ * Allows vertical resizing while preventing horizontal overflow
+ */
+textarea {
+  overflow: auto;
+  resize: vertical;
+}
+
+/**
+ * Additional form element resets
+ * Prevents layout inconsistencies and browser-specific styling
+ */
+input,
+textarea,
+select {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  line-height: var(--leading-normal); /* Match default body line-height */
+}
+
+/**
+ * Remove default select appearance fully
+ * Allows for consistent custom styling across browsers
+ */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* ==========================================================================
+   4. TEXT ELEMENTS
+   ========================================================================== */
+
+/**
+ * Abbreviation styling
+ * Provides visual indicator for abbreviations with titles
+ */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/**
+ * Bold and strong elements
+ * Ensures proper font weight rendering
+ */
+b,
+strong {
+  font-weight: bold;
+}
+
+/**
+ * Definition term styling
+ * Provides italic styling for definition terms
+ */
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Heading normalization
+ * Reset all headings to prevent inconsistent spacing and sizing
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0; /* Reset all margins - control spacing via components */
+  font-weight: inherit; /* Let tokens control this */
+  font-size: inherit; /* Explicitly reset size - use tokens in components */
+}
+
+/**
+ * Mark element styling
+ * Provides highlight background and text color
+ */
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/**
+ * Small text normalization
+ * Sets font size to 80% of parent and prevents spacing issues
+ */
+small {
+  font-size: 80%;
+  margin: 0; /* Prevent weird spacing */
+}
+
+/**
+ * Subscript and superscript normalization
+ * Ensures proper positioning and sizing, prevents spacing issues
+ */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  margin: 0; /* Prevent spacing shifts */
+}
+
+/**
+ * Superscript positioning
+ * Moves text above baseline
+ */
+sup {
+  top: -0.5em;
+}
+
+/**
+ * Subscript positioning
+ * Moves text below baseline
+ */
+sub {
+  bottom: -0.25em;
+}
+
+/**
+ * Code, keyboard, pre, and sample text styling
+ * Uses monospace font family for code-related elements
+ */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace;
+  font-size: 1em;
+}
+
+/**
+ * Pre element overflow
+ * Allows horizontal scrolling for long code blocks
+ */
+pre {
+  overflow: auto;
+}
+
+/* ==========================================================================
+   5. MEDIA & IMAGES
+   ========================================================================== */
+
+/**
+ * Image normalization
+ * Removes border, ensures responsive sizing, and block display
+ */
+img {
+  border: 0;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/**
+ * SVG overflow handling
+ * Prevents SVG overflow issues
+ */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/**
+ * Figure element margin
+ * Provides consistent spacing around figures
+ */
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * Horizontal rule normalization
+ * Ensures consistent height and border styling
+ */
+hr {
+  box-sizing: content-box;
+  height: 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+/* ==========================================================================
+   6. LINKS
+   ========================================================================== */
+
+/**
+ * Link background normalization
+ * Removes default background color
+ */
+a {
+  background-color: transparent;
+}
+
+/**
+ * Link active and hover states
+ * Removes outline on interaction (focus-visible handled in globals.css)
+ * Note: Focus states are handled in globals.css for accessibility
+ */
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* ==========================================================================
+   7. TABLES
+   ========================================================================== */
+
+/**
+ * Table border normalization
+ * Ensures consistent border rendering
+ */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/**
+ * Table cell padding normalization
+ * Removes default padding for consistent styling
+ */
+td,
+th {
+  padding: 0;
+}
+
+/* ==========================================================================
+   8. PARAGRAPH & LIST ELEMENTS
+   ========================================================================== */
+
+/**
+ * Paragraph margin reset
+ * Browsers add margin: 1em 0 by default, which creates unpredictable spacing
+ * Control spacing via components or utility classes instead
+ */
+p {
+  margin: 0;
+}
+
+/**
+ * List element resets
+ * Remove default margins, padding, and list styles
+ * Control list styling via components (e.g., .list-disc, .list-decimal)
+ */
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none; /* Remove bullets - control via components */
+}
+
+li {
+  margin: 0;
+  padding: 0;
+}
+

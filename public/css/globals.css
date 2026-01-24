@@ -1,0 +1,117 @@
+/**
+ * Globals CSS - Tailwind + HyperUI Base Styles
+ * 
+ * This file imports the reset.css foundation and applies base-level styles
+ * for Tailwind CSS integration. All styles are wrapped in @layer base to
+ * ensure proper Tailwind CSS cascading order.
+ */
+
+/**
+ * LAYOUT FLOW RULES
+ * 
+ * To prevent layout chaos, follow these patterns:
+ * 
+ * 1. Never apply margins to first/last children of containers
+ *    → Use gap, padding, or margin-collapse patterns instead
+ * 
+ * 2. Never set width: 100% + padding
+ *    → Use box-sizing: border-box (we have this)
+ *    → Or use padding on parent instead
+ * 
+ * 3. Never use negative margins unless documented
+ *    → Very easy to break collapsing margin behavior
+ * 
+ * 4. Use flexbox/grid for layout, not floats
+ *    → Floats cause layout surprises
+ * 
+ * 5. Line-height should never be unitless values < 1
+ *    → Use var(--leading-*) which are all >= 1.25
+ */
+
+/**
+ * Base layer for Tailwind CSS
+ * Styles in this layer will be applied before Tailwind's component and utility layers
+ */
+@layer base {
+  /**
+   * Smooth scrolling behavior
+   * Provides a better user experience when navigating with anchor links
+   */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /**
+   * Body typography and color
+   * Uses CSS custom properties for theming flexibility
+   */
+  body {
+    font-family: var(--font-body);
+    color: rgb(var(--color-cream));
+  }
+
+  /**
+   * Link base styling
+   * Provides visual distinction from regular text
+   * Users need to be able to identify links without hovering
+   */
+  a {
+    color: rgb(var(--color-accent));
+    text-decoration: underline;
+  }
+
+  /**
+   * Visited link state
+   * Slightly muted to indicate previously visited links
+   */
+  a:visited {
+    color: rgb(var(--color-accent) / 0.7);
+  }
+
+  /**
+   * Base link hover states
+   * Provides consistent link interaction feedback
+   */
+  a:hover {
+    opacity: var(--opacity-80);
+    transition: opacity var(--duration-200) var(--ease-out);
+  }
+
+  /**
+   * Link focus-visible state (CRITICAL for accessibility)
+   * WCAG 2.4.7 Focus Visible - Keyboard users need visible focus indicators
+   * Only shows on keyboard navigation, not mouse clicks
+   */
+  a:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 2px;
+  }
+
+  /**
+   * Base button hover states
+   * Provides consistent button interaction feedback
+   */
+  button:hover {
+    opacity: var(--opacity-90);
+    transition: opacity var(--duration-200) var(--ease-out);
+  }
+
+  /**
+   * Button active state
+   * Provides visual feedback on click
+   */
+  button:active {
+    opacity: var(--opacity-80);
+  }
+
+  /**
+   * Button focus-visible state (CRITICAL for accessibility)
+   * WCAG 2.4.7 Focus Visible - Keyboard users need visible focus indicators
+   * Only shows on keyboard navigation, not mouse clicks
+   */
+  button:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 2px;
+  }
+}
+
