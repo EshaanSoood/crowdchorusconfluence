@@ -1,0 +1,308 @@
+@font-face {
+  font-family: "ParisRebel";
+  src: url("../fonts/PARISREBEL.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --color-cream: #fffdee;
+  --color-blue: #4835fd;
+  --color-coral: #fe4a4b;
+  --color-gold: #ffb236;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.15);
+  --shadow-button: 0 10px 30px rgba(72, 53, 253, 0.3);
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2.5rem;
+  --spacing-xl: 4rem;
+  --max-width: 56.25rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-cream);
+  color: var(--color-black);
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a,
+button,
+input,
+select {
+  font: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.event-container {
+  width: min(100% - 2.5rem, var(--max-width));
+  margin: 0 auto;
+}
+
+.event-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: 3.75rem 1.25rem;
+}
+
+.event-hero__poster {
+  width: min(100%, 31.25rem);
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.event-button,
+.ticket-form__submit,
+.ticket-confirmation__back {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 3rem;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-blue);
+  color: var(--color-coral);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 1rem 2.5rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.event-button:hover,
+.ticket-form__submit:hover:not(:disabled),
+.ticket-confirmation__back:hover {
+  background-color: #3d2ae8;
+  box-shadow: var(--shadow-button);
+  transform: translateY(-2px);
+}
+
+.event-section {
+  padding: 5rem 0;
+}
+
+.event-heading {
+  margin: 0 0 2.5rem;
+  color: var(--color-blue);
+  font-family: "ParisRebel", cursive;
+  font-size: clamp(2.25rem, 6vw, 3rem);
+  line-height: 1.1;
+}
+
+.event-heading--centered {
+  text-align: center;
+}
+
+.event-section--about p,
+.event-accordion__copy p,
+.ticket-confirmation p,
+.event-footer p {
+  margin: 0 0 1.25rem;
+}
+
+.event-accordion {
+  display: grid;
+  gap: 1rem;
+}
+
+.event-accordion__item {
+  border: 2px solid var(--color-blue);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.event-accordion__item:hover {
+  box-shadow: 0 8px 24px rgba(72, 53, 253, 0.1);
+}
+
+.event-accordion__summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  cursor: pointer;
+  background-color: var(--color-blue);
+  color: var(--color-coral);
+  padding: 1.25rem;
+}
+
+.event-accordion__summary::-webkit-details-marker {
+  display: none;
+}
+
+.event-accordion__summary::after {
+  content: "▼";
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.event-accordion__item[open] .event-accordion__summary::after {
+  transform: rotate(180deg);
+}
+
+.event-accordion__title {
+  font-family: "ParisRebel", cursive;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  line-height: 1.1;
+}
+
+.event-accordion__content {
+  display: grid;
+  gap: 1.875rem;
+  padding: 1.875rem;
+  background-color: var(--color-cream);
+  border-top: 2px solid var(--color-blue);
+}
+
+.event-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.event-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.event-section--tickets {
+  background-color: var(--color-cream);
+}
+
+.ticket-form,
+.ticket-confirmation {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-blue);
+  border-radius: var(--radius-sm);
+  padding: 2.5rem;
+}
+
+.ticket-form__row {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.ticket-form__field {
+  margin-bottom: 1.5rem;
+}
+
+.ticket-form__field:last-of-type {
+  margin-bottom: 0;
+}
+
+.ticket-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--color-blue);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.ticket-form input,
+.ticket-form select {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem;
+  border: 2px solid var(--color-blue);
+  border-radius: 0.25rem;
+  background-color: var(--color-white);
+}
+
+.ticket-form input:required:invalid,
+.ticket-form select:required:invalid {
+  border-color: var(--color-coral);
+}
+
+.ticket-form__submit {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.ticket-form__submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ticket-confirmation {
+  display: none;
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.ticket-confirmation.is-visible {
+  display: block;
+}
+
+.ticket-confirmation__amount {
+  display: block;
+  margin-bottom: 1.875rem;
+  color: var(--color-blue);
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 700;
+}
+
+.ticket-confirmation__qr {
+  max-width: 23.75rem;
+  margin: 0 auto 1.875rem;
+}
+
+.ticket-confirmation__qr img {
+  border: 2px solid var(--color-blue);
+  border-radius: var(--radius-sm);
+}
+
+.event-footer {
+  margin-top: 5rem;
+  padding: 2.5rem 1.25rem;
+  background-color: var(--color-blue);
+  color: var(--color-coral);
+  text-align: center;
+}
+
+.event-footer p:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 48rem) {
+  .ticket-form__row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
