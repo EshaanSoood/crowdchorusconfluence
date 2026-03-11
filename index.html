@@ -160,14 +160,14 @@
             <label for="ticket-quantity">Number of Tickets</label>
             <select id="ticket-quantity" name="ticket-quantity" required>
               <option value="">Select quantity</option>
-              <option value="1">1 Ticket - $14</option>
-              <option value="2">2 Tickets - $25</option>
-              <option value="3">3 Tickets - $39</option>
-              <option value="4">4 Tickets - $50</option>
-              <option value="5">5 Tickets - $64</option>
-              <option value="6">6 Tickets - $75</option>
-              <option value="7">7 Tickets - $89</option>
-              <option value="8">8 Tickets - $100</option>
+              <option value="1">1 Ticket - $20</option>
+              <option value="2">2 Tickets - $40</option>
+              <option value="3">3 Tickets - $60</option>
+              <option value="4">4 Tickets - $80</option>
+              <option value="5">5 Tickets - $100</option>
+              <option value="6">6 Tickets - $120</option>
+              <option value="7">7 Tickets - $140</option>
+              <option value="8">8 Tickets - $160</option>
             </select>
           </div>
 
@@ -200,19 +200,8 @@
 
   <script>
     function calculateTotal(quantity) {
-      const basePrice = 14;
-      const twoPackPrice = 25;
-
-      if (quantity === 1) return basePrice;
-
-      const fullPacks = Math.floor(quantity / 2);
-      const remainder = quantity % 2;
-
-      let total = fullPacks * twoPackPrice;
-
-      if (remainder === 1) total += basePrice;
-
-      return total;
+      const ticketPrice = 20;
+      return quantity * ticketPrice;
     }
 
     const ticketForm = document.getElementById("ticket-form");
