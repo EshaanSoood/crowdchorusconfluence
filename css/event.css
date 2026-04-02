@@ -81,9 +81,7 @@ select:focus-visible {
   box-shadow: var(--shadow-card);
 }
 
-.event-button,
-.ticket-form__submit,
-.ticket-confirmation__back {
+.event-button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -102,9 +100,7 @@ select:focus-visible {
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-.event-button:hover,
-.ticket-form__submit:hover:not(:disabled),
-.ticket-confirmation__back:hover {
+.event-button:hover {
   background-color: #3d2ae8;
   box-shadow: var(--shadow-button);
   transform: translateY(-2px);
@@ -128,7 +124,6 @@ select:focus-visible {
 
 .event-section--about p,
 .event-accordion__copy p,
-.ticket-confirmation p,
 .event-footer p {
   margin: 0 0 1.25rem;
 }
@@ -207,86 +202,11 @@ select:focus-visible {
   background-color: var(--color-cream);
 }
 
-.ticket-form,
-.ticket-confirmation {
+.ticket-notice {
   background-color: var(--color-white);
   border: 2px solid var(--color-blue);
   border-radius: var(--radius-sm);
   padding: 2.5rem;
-}
-
-.ticket-form__row {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.ticket-form__field {
-  margin-bottom: 1.5rem;
-}
-
-.ticket-form__field:last-of-type {
-  margin-bottom: 0;
-}
-
-.ticket-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: var(--color-blue);
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
-.ticket-form input,
-.ticket-form select {
-  width: 100%;
-  min-height: 3rem;
-  padding: 0.75rem;
-  border: 2px solid var(--color-blue);
-  border-radius: 0.25rem;
-  background-color: var(--color-white);
-}
-
-.ticket-form input:required:invalid,
-.ticket-form select:required:invalid {
-  border-color: var(--color-coral);
-}
-
-.ticket-form__submit {
-  width: 100%;
-  margin-top: 1.5rem;
-}
-
-.ticket-form__submit:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-.ticket-confirmation {
-  display: none;
-  margin-top: 2.5rem;
-  text-align: center;
-}
-
-.ticket-confirmation.is-visible {
-  display: block;
-}
-
-.ticket-confirmation__amount {
-  display: block;
-  margin-bottom: 1.875rem;
-  color: var(--color-blue);
-  font-size: clamp(2rem, 5vw, 2.5rem);
-  font-weight: 700;
-}
-
-.ticket-confirmation__qr {
-  max-width: 23.75rem;
-  margin: 0 auto 1.875rem;
-}
-
-.ticket-confirmation__qr img {
-  border: 2px solid var(--color-blue);
-  border-radius: var(--radius-sm);
 }
 
 .event-footer {
@@ -299,10 +219,4 @@ select:focus-visible {
 
 .event-footer p:last-child {
   margin-bottom: 0;
-}
-
-@media (min-width: 48rem) {
-  .ticket-form__row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
